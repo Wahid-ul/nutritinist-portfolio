@@ -1,11 +1,12 @@
 import { AnimatePresence, motion } from 'framer-motion'
+import { useState } from 'react'
 import { Routes, Route, NavLink, useLocation } from 'react-router-dom'
 import { Home } from './pages/Home'
 import { About } from './pages/About'
 import { Recipe } from './pages/Recipe'
 import { Vlog } from './pages/Vlog'
 import { Footer } from './components/Footer'
-import { Menu } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { CalendarDays } from 'lucide-react'
 import { FaWhatsapp } from 'react-icons/fa'
 const navItems = [
@@ -16,8 +17,8 @@ const navItems = [
 ]
 
 function App() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const location = useLocation()
-
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100">
       <header className="sticky top-0 z-40 border-b border-white/10 bg-slate-950/95 backdrop-blur-xl">
@@ -40,12 +41,48 @@ function App() {
             ))}
           </nav>
 
-          <button className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-100 transition hover:bg-white/10 md:hidden">
-            <Menu className="h-5 w-5" />
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-100 transition hover:bg-white/10 md:hidden"
+          >
+            {mobileMenuOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
           </button>
         </div>
       </header>
-
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.25 }}
+            className="fixed top-[72px] left-0 right-0 z-40 border-b border-white/10 bg-slate-950/95 backdrop-blur-xl md:hidden"
+          >
+            <nav className="flex flex-col px-6 py-4">
+              {navItems.map((item) => (
+                <NavLink
+                  key={item.href}
+                  to={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={({ isActive }) =>
+                    `rounded-xl px-4 py-3 text-sm transition ${
+                      isActive
+                        ? 'bg-white/10 text-white font-semibold'
+                        : 'text-slate-400 hover:bg-white/5 hover:text-white'
+                    }`
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              ))}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
       <main className="relative overflow-hidden">
         <div className="absolute inset-x-0 top-0 h-72 bg-hero-grid opacity-80 pointer-events-none" />
         <AnimatePresence mode="wait">
