@@ -8,15 +8,21 @@ const testimonials = [
     rating: 5
   },
   {
+    name: 'Wahid-ul Alam',
+    role: 'Software Engineer',
+    feedback: "After a bike accident, I suffered a hand injury and had no idea how to recover quickly. Shalin's personalized meal plan and nutrition guidance helped speed up my healing process. Drinking Chae regularly also played a big role in my recovery and overall energy levels.",
+    rating: 5
+},  
+  {
     name: 'Rajesh Patel',
     role: 'Corporate Professional',
-    feedback: "After struggling with energy crashes, Shallini's guidance on balanced nutrition has been a game-changer. Her vlog series is incredibly insightful and easy to follow.",
+    feedback: "After struggling with energy crashes, Shalini's guidance on balanced nutrition has been a game-changer. Her vlog series is incredibly insightful and easy to follow.",
     rating: 5
   },
   {
     name: 'Anaya Singh',
     role: 'Yoga Instructor',
-    feedback: "The mindfulness-focused approach to nutrition resonates deeply with my wellness philosophy. Shallini understands that food is medicine and joy combined.",
+    feedback: "The mindfulness-focused approach to nutrition resonates deeply with my wellness philosophy. Shalini understands that food is medicine and joy combined.",
     rating: 5
   },
   {
