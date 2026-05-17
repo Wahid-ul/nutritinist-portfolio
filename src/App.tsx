@@ -68,8 +68,8 @@ function App() {
          
           
       </main>
-            <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end gap-3 sm:bottom-6 sm:right-6">
-  
+            <div className="fixed bottom-4 right-4 z-50 flex flex-row items-center gap-3 sm:bottom-6 sm:right-6">
+
             {/* Consultation Button */}
             <motion.a
               href="https://calendly.com/awahidul606/30min"
@@ -90,12 +90,12 @@ function App() {
                 font-semibold text-white
                 shadow-[0_0_30px_rgba(217,70,239,0.35)]
                 transition hover:bg-fuchsia-400
-                max-w-[220px] sm:max-w-none
+                whitespace-nowrap
               "
             >
               <CalendarDays className="h-4 w-4 sm:h-5 sm:w-5" />
-              
-              <span className="whitespace-nowrap">
+
+              <span>
                 Book Free Consultation
               </span>
             </motion.a>
@@ -117,11 +117,13 @@ function App() {
                 text-white
                 shadow-[0_0_40px_rgba(34,197,94,0.5)]
                 transition hover:bg-green-400
+                flex-shrink-0
               "
               aria-label="Chat on WhatsApp"
             >
               <FaWhatsapp className="h-6 w-6 sm:h-8 sm:w-8" />
             </motion.a>
+
           </div>
                 <Footer />
               </div>
