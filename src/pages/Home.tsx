@@ -1,9 +1,11 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { InteractiveCard } from '../components/InteractiveCard'
+import { Testimonials } from '../components/Testimonials'
 
 export function Home() {
   return (
+    <>
     <section className="relative overflow-hidden rounded-[3rem] border border-white/10 p-4 sm:p-6 md:p-8 lg:p-12 min-h-[72vh] sm:min-h-[68vh] shadow-glow">
       {/* Animated Background Image */}
       <motion.div
@@ -14,7 +16,7 @@ export function Home() {
       >
         <img
           src="/assets/shalini_goswami_1.jpeg"
-          alt="Shallini Goswami - Nutritionist"
+          alt="Shalini Goswami - Nutritionist"
           className="absolute inset-0 h-full w-full object-cover object-[20%_center] sm:object-left"
         />
         <div className="absolute inset-0 bg-slate-950/50 backdrop-blur-xs" />
@@ -36,7 +38,7 @@ export function Home() {
               Nutrition with intention
             </div>
             <div className="space-y-6">
-              <p className="text-sm uppercase tracking-[0.35em] text-fuchsia-400">Hello, I am Shallini</p>
+              <p className="text-sm uppercase tracking-[0.35em] text-fuchsia-400">Hello, I am Shalini</p>
               <h1 className="text-5xl font-semibold leading-tight text-white sm:text-6xl"></h1>
             </div>
           </div>
@@ -99,5 +101,7 @@ export function Home() {
         </motion.div>
       </div>
     </section>
+    <Testimonials />
+    </>
   )
 }
