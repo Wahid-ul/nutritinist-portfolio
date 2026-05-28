@@ -9,6 +9,7 @@ export function Home() {
   const [stage, setStage] = useState<'hero' | 'fade' | 'afterFade' | 'unlocked'>('hero')
   const isTransitioning = useRef(false)
   const heroWrapperRef = useRef<HTMLDivElement>(null)
+  const touchStartY = useRef<number>(0)
 
   useEffect(() => {
     document.body.style.overflow = stage === 'unlocked' ? '' : 'hidden'
@@ -57,11 +58,46 @@ export function Home() {
     }
   }
 
+  const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    touchStartY.current = event.touches[0].clientY
+  }
+
+  const handleTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
+    const touchEndY = event.changedTouches[0].clientY
+    const deltaY = touchStartY.current - touchEndY
+
+    // Only proceed if swiping up (negative deltaY, meaning finger moved down)
+    if (deltaY <= 0) return
+    if (isTransitioning.current) return
+
+    if (stage === 'hero') {
+      isTransitioning.current = true
+      setStage('fade')
+      window.setTimeout(() => {
+        isTransitioning.current = false
+      }, 900)
+    } else if (stage === 'fade') {
+      isTransitioning.current = true
+      setStage('afterFade')
+      window.setTimeout(() => {
+        isTransitioning.current = false
+      }, 900)
+    } else if (stage === 'afterFade') {
+      isTransitioning.current = true
+      setStage('unlocked')
+      window.setTimeout(() => {
+        isTransitioning.current = false
+      }, 900)
+    }
+  }
+
   return (
     <>
       <div
         ref={heroWrapperRef}
         onWheel={handleWheel}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
         className="relative overflow-hidden border-none"
         style={{ minHeight: 'calc(100vh - 112px)', maxHeight: stage === 'unlocked' ? 'auto' : 'calc(100vh - 112px)' }}
       >
