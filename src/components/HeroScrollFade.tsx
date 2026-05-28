@@ -10,17 +10,31 @@ export function HeroScrollFade() {
     const ctx = gsap.context(() => {
       const video = videoRef.current
       if (video) {
+        video.muted = true
+        video.playsInline = true
+        video.autoplay = true
+
         const playVideo = async () => {
           try {
-            // Add small delay to ensure video is ready on mobile
-            await new Promise(resolve => setTimeout(resolve, 100))
             await video.play()
           } catch (error) {
             console.debug('Video autoplay blocked, user interaction may be required.', error)
           }
         }
 
-        void playVideo()
+        const onLoadedData = () => {
+          void playVideo()
+        }
+
+        if (video.readyState >= 2) {
+          void playVideo()
+        } else {
+          video.addEventListener('loadeddata', onLoadedData, { once: true })
+        }
+
+        return () => {
+          video.removeEventListener('loadeddata', onLoadedData)
+        }
       }
 
       gsap.fromTo(
@@ -45,9 +59,9 @@ export function HeroScrollFade() {
         muted
         playsInline
         autoPlay
+        loop
         preload="auto"
         controls={false}
-        controlsList="nodownload"
         onEnded={() => {
           videoRef.current?.pause()
         }}
