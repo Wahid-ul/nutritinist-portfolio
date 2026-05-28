@@ -4,41 +4,11 @@ import gsap from 'gsap'
 
 export function HeroScrollFade() {
   const sectionRef = useRef<HTMLDivElement>(null)
-  const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const video = videoRef.current
-      if (video) {
-        video.muted = true
-        video.playsInline = true
-        video.autoplay = true
-
-        const playVideo = async () => {
-          try {
-            await video.play()
-          } catch (error) {
-            console.debug('Video autoplay blocked, user interaction may be required.', error)
-          }
-        }
-
-        const onLoadedData = () => {
-          void playVideo()
-        }
-
-        if (video.readyState >= 2) {
-          void playVideo()
-        } else {
-          video.addEventListener('loadeddata', onLoadedData, { once: true })
-        }
-
-        return () => {
-          video.removeEventListener('loadeddata', onLoadedData)
-        }
-      }
-
       gsap.fromTo(
-        videoRef.current,
+        sectionRef.current,
         { opacity: 0, scale: 1.05 },
         { opacity: 1, scale: 1, duration: 1.2, ease: 'power3.out' }
       )
@@ -52,19 +22,11 @@ export function HeroScrollFade() {
       ref={sectionRef}
       className="relative h-[calc(100vh-112px)] max-h-[calc(100vh-112px)] overflow-hidden bg-black"
     >
-      <video
-        ref={videoRef}
-        src="/assets/promogranate_video.mp4"
+      <img
+        src="/assets/pomogranate_burst.gif"
+        alt="Pomegranate burst animation"
         className="absolute inset-0 h-full w-full object-cover"
-        muted
-        playsInline
-        autoPlay
-        loop
-        preload="auto"
-        controls={false}
-        onEnded={() => {
-          videoRef.current?.pause()
-        }}
+        loading="eager"
       />
 
       <div className="absolute inset-0 z-20 flex items-center justify-center">
