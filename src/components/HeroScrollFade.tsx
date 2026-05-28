@@ -70,20 +70,7 @@ export function HeroScrollFade() {
         </div>
       </div>
 
-      <motion.div
-        initial={{ opacity: 0, x: 40 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1.2, ease: 'easeOut', delay: 2.4 }}
-        className="absolute top-0 right-0 z-20 flex h-full w-full max-w-full flex-col justify-center rounded-none border-l border-white/10 bg-slate-950/60 p-8 text-left text-sm text-slate-100 shadow-[0_30px_90px_rgba(15,23,42,0.55)] backdrop-blur-3xl md:w-2/5 lg:w-1/3"
-      >
-        <div className="max-w-md">
-          <p className="text-xs uppercase tracking-[0.35em] text-emerald-200">Diet note</p>
-          <h3 className="mt-4 text-lg font-semibold text-white">Smart nutrition, strong results.</h3>
-          <p className="mt-4 leading-7 text-slate-200">
-            Embrace whole foods, clean energy, and mindful portions to support sustained vitality without compromise.
-          </p>
-        </div>
-      </motion.div>
+
     </section>
   )
 }

@@ -71,9 +71,7 @@ export function HeroSection() {
             </div>
             <div className="space-y-6">
               <p className="text-xs uppercase tracking-[0.35em] text-fuchsia-400 sm:text-sm md:text-base">Hello, I am Shalini</p>
-              <h1 className="text-4xl font-semibold leading-tight text-white sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5rem]">
-                Personalized nutrition that feels effortless.
-              </h1>
+              <h1 className="text-4xl font-semibold leading-tight text-white sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5rem]"></h1>
             </div>
           </motion.div>
 
