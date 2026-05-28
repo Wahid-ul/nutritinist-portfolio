@@ -12,6 +12,8 @@ export function HeroScrollFade() {
       if (video) {
         const playVideo = async () => {
           try {
+            // Add small delay to ensure video is ready on mobile
+            await new Promise(resolve => setTimeout(resolve, 100))
             await video.play()
           } catch (error) {
             console.debug('Video autoplay blocked, user interaction may be required.', error)
@@ -44,6 +46,8 @@ export function HeroScrollFade() {
         playsInline
         autoPlay
         preload="auto"
+        controls={false}
+        controlsList="nodownload"
         onEnded={() => {
           videoRef.current?.pause()
         }}
